@@ -15,7 +15,7 @@ public class LoginPassActions {
 
     static {
         try {
-            Logman.logWarning(LoginPass.SPRE + "Using " + LoginPassSettings.DIGEST_TYPE + " as digest type.");
+            Logman.logInfo(LoginPass.SPRE + "Using " + LoginPassSettings.DIGEST_TYPE + " as digest type.");
             md = MessageDigest.getInstance(LoginPassSettings.DIGEST_TYPE);
         } catch (Exception e) {
             Logman.logSevere(LoginPass.SPRE + "Cannot create MessageDigest! Expect errors.");
@@ -48,7 +48,7 @@ public class LoginPassActions {
         for (int i = 0; i < b3.length; i++) {
             sb.append(b3[i]);
         }
-        Logman.logInfo(LoginPass.SPRE + "b3: " + sb.toString());
+        //Logman.logInfo(LoginPass.SPRE + "b3: " + sb.toString());
         return md.digest(b3);
     }
 
