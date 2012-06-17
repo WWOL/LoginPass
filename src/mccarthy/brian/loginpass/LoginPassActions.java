@@ -2,6 +2,7 @@ package mccarthy.brian.loginpass;
 
 import java.security.MessageDigest;
 
+import net.canarymod.Canary;
 import net.canarymod.Logman;
 import net.canarymod.api.entity.Player;
 
@@ -18,7 +19,8 @@ public class LoginPassActions {
             Logman.logInfo(LoginPass.SPRE + "Using " + LoginPassSettings.DIGEST_TYPE + " as digest type.");
             md = MessageDigest.getInstance(LoginPassSettings.DIGEST_TYPE);
         } catch (Exception e) {
-            Logman.logSevere(LoginPass.SPRE + "Cannot create MessageDigest! Expect errors.");
+            Logman.logSevere(LoginPass.SPRE + "Cannot create MessageDigest! Disabling.");
+            Canary.loader().disablePlugin(LoginPass.NAME);
         }
     }//target
     public static void sendHelp(Player p) {
