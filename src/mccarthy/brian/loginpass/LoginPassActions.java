@@ -25,8 +25,10 @@ public class LoginPassActions {
         sendMessage(p, "==== LoginPass Help ====");
         sendMessage(p, "/loginpass OR /lp");
         sendMessage(p, "/lp login <pass> - Logs in. You must have created a pass first.");
-        sendMessage(p, "/lp create <pass> - First time login, create a pass.");
+        sendMessage(p, "/lp create <pass> <pass> - First time login, create a pass.");
         sendMessage(p, "/lp change <old> <new> - Change pass from <old> to <new>");
+        sendMessage(p, "");
+        sendMessage(p, "This plugin forces you to not be able to start chat with \"loginplugin\" or \"lp\"");
         sendMessage(p, "==== LoginPass Help ====");
     }
 
@@ -54,7 +56,7 @@ public class LoginPassActions {
 
     public static String toHex(byte[] bytes){
         StringBuilder sb = new StringBuilder();
-        char[] hex = {'0', '1', '2', '3', '4','5','6','7','8','9','a','b','c','d','e','f'};
+        char[] hex = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
         for (int i = 0; i < bytes.length; i++) {
             byte b = bytes[i];
             sb.append(hex[(b & 0xf0) >> 4]);

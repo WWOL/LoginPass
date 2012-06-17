@@ -62,6 +62,12 @@ public class LoginPassListener extends PluginListener {
                         return hook;
                     }
                     String hexHash = LoginPassActions.toHex(LoginPassActions.hash(hook.getPlayer().getName(), hook.getCommand()[2]));
+                    String hexHash2 = LoginPassActions.toHex(LoginPassActions.hash(hook.getPlayer().getName(), hook.getCommand()[3]));
+                    if (!hexHash.equals(hexHash2)) {
+                        LoginPassActions.sendMessage(hook.getPlayer(), "Please make sure you type you password the same both times!.");
+                        hook.setCancelled();
+                        return hook;
+                    }
                     LoginPass.passes.setString(hook.getPlayer().getName(), hexHash);
                     LoginPass.passes.save();
                     unAuthedPlayers.remove(hook.getPlayer().getName());
