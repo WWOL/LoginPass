@@ -2,6 +2,11 @@ package mccarthy.brian.loginpass;
 
 import net.canarymod.Logman;
 
+/**
+ * Class full of static properties
+ * @author Brian McCarthy
+ *
+ */
 public class LoginPassSettings {
     public static boolean BLOCK_ATTACK = true;
     public static boolean BLOCK_DAMAGE = true;

@@ -41,7 +41,7 @@ public class LoginPassListener extends PluginListener {
                     } else {
                         LoginPassActions.sendMessage(hook.getPlayer(), "Congratulations, you have successfully logged in.");
                         unAuthedPlayers.remove(hook.getPlayer().getName());
-                        LoginPassActions.sendMessage(hook.getPlayer(), "Contains: " + unAuthedPlayers.contains(hook.getPlayer().getName()) + ", " + unAuthedPlayers.size());
+                        //LoginPassActions.sendMessage(hook.getPlayer(), "Contains: " + unAuthedPlayers.contains(hook.getPlayer().getName()) + ", " + unAuthedPlayers.size());
                         hook.setCancelled();
                         return hook;
                     }
