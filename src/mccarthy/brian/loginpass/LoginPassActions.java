@@ -22,7 +22,12 @@ public class LoginPassActions {
         }
     }//target
     public static void sendHelp(Player p) {
-        p.sendMessage("");
+        sendMessage(p, "==== LoginPass Help ====");
+        sendMessage(p, "/loginpass OR /lp");
+        sendMessage(p, "/lp login <pass> - Logs in. You must have created a pass first.");
+        sendMessage(p, "/lp create <pass> - First time login, create a pass.");
+        sendMessage(p, "/lp change <old> <new> - Change pass from <old> to <new>");
+        sendMessage(p, "==== LoginPass Help ====");
     }
 
     public static void sendMessage(Player p, String message) {
