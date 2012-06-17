@@ -46,7 +46,7 @@ public class LoginPassListener extends PluginListener {
                         return hook;
                     }
                     
-                } else if (hook.getCommand()[1].equalsIgnoreCase("test")) {
+                } /*else if (hook.getCommand()[1].equalsIgnoreCase("test")) {
                     byte[] bytes = LoginPassActions.hash("WWOL", "TEST");
                     StringBuilder sb = new StringBuilder();
                     for (byte currByte : bytes) {
@@ -55,7 +55,7 @@ public class LoginPassListener extends PluginListener {
                     LoginPassActions.sendMessage(hook.getPlayer(), "Hash: " + sb.toString());
                     LoginPassActions.sendMessage(hook.getPlayer(), "Hash (hex): " + LoginPassActions.toHex(bytes));
                     
-                } else if (hook.getCommand()[1].equalsIgnoreCase("create")) {
+                }*/ else if (hook.getCommand()[1].equalsIgnoreCase("create")) {
                     if (LoginPass.passes.containsKey(hook.getPlayer().getName())) {
                         LoginPassActions.sendMessage(hook.getPlayer(), "You have already set a password.");
                         hook.setCancelled();
@@ -67,14 +67,14 @@ public class LoginPassListener extends PluginListener {
                     unAuthedPlayers.remove(hook.getPlayer().getName());
                     LoginPassActions.sendMessage(hook.getPlayer(), "Pass created! Auto logged in.");
                     
-                } else if (hook.getCommand()[1].equalsIgnoreCase("test2")) {
+                } /*else if (hook.getCommand()[1].equalsIgnoreCase("test2")) {
                     String hexHash = LoginPassActions.toHex(LoginPassActions.hash(hook.getPlayer().getName(), hook.getCommand()[2]));
                     String hexHash2 = LoginPassActions.toHex(LoginPassActions.hash(hook.getPlayer().getName(), hook.getCommand()[3]));
                     LoginPassActions.sendMessage(hook.getPlayer(), "Hash1: " + hexHash);
                     LoginPassActions.sendMessage(hook.getPlayer(), "Hash2: " + hexHash2);
                     LoginPassActions.sendMessage(hook.getPlayer(), "Same?: " + hexHash.equals(hexHash2));
                     
-                } else if (hook.getCommand()[1].equalsIgnoreCase("change")) {
+                }*/ else if (hook.getCommand()[1].equalsIgnoreCase("change")) {
                     String hexHash = LoginPassActions.toHex(LoginPassActions.hash(hook.getPlayer().getName(), hook.getCommand()[2]));
                     String storedHash = LoginPass.passes.getString(hook.getPlayer().getName());
                     String hexHash2 = LoginPassActions.toHex(LoginPassActions.hash(hook.getPlayer().getName(), hook.getCommand()[3]));
