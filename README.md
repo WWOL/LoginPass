@@ -1,4 +1,4 @@
 LoginPass
 =========
 
-CanaryCreeper plugin! :O 
+CanaryCreeper pluign! :O
