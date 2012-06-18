@@ -67,7 +67,23 @@ public class LoginPassActions {
         return sb.toString();
     }
     
-    public static boolean checkIP(Player p) {
-        return true;
+    public static boolean ipMatches(String name, String ip) {
+        for (String currIp : LoginPass.ips.getString(name, "").split(",")) {
+            if (currIp.trim().equals("")) {
+                continue;
+            }
+            if (currIp.equals("*")) {
+                return true;
+            }
+            String currPart = "";
+            for (String part : ip.split(".")) {
+                currPart += part;
+                if (currIp.equals(currPart + ".*")) {
+                    return true;
+                }
+                currPart += ".";
+            }
+        }
+        return false;
     }
 }

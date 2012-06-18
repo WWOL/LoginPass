@@ -11,6 +11,7 @@ import net.canarymod.hook.player.ChatHook;
 import net.canarymod.hook.player.ConnectionHook;
 import net.canarymod.hook.player.ItemHook;
 import net.canarymod.hook.player.LeftClickHook;
+import net.canarymod.hook.player.LoginChecksHook;
 import net.canarymod.hook.player.PlayerMoveHook;
 import net.canarymod.hook.player.RightClickHook;
 import net.canarymod.plugin.PluginListener;
@@ -139,7 +140,7 @@ public class LoginPassListener extends PluginListener {
         if (LoginPass.passes.containsKey(hook.getPlayer().getName())) {
             LoginPassActions.sendMessage(hook.getPlayer(), "Please login using /loginpass login <pass>.");
         } else {
-            LoginPassActions.sendMessage(hook.getPlayer(), "Please create a password using /loginpass create <pass>.");
+            LoginPassActions.sendMessage(hook.getPlayer(), "Please create a password using /loginpass create <pass> <pass>.");
         }
         return hook;
     }
@@ -189,6 +190,16 @@ public class LoginPassListener extends PluginListener {
             LoginPassActions.sendMessage(hook.getPlayer(), "You can not left click while not logged in!");
             hook.setCancelled();
             hook.getBlock().update();
+        }
+        return hook;
+    }
+    
+    public Hook onLoginChecks(LoginChecksHook hook) {
+        if (LoginPassSettings.CHECK_IP) {
+            boolean correctIP = LoginPassActions.ipMatches(hook.getName(), hook.getIp());
+            if (!correctIP) {
+                hook.setKickReason("Your IP does not match an aloud one!");
+            }
         }
         return hook;
     }

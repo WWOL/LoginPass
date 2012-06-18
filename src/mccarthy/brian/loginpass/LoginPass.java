@@ -26,8 +26,9 @@ public class LoginPass extends Plugin {
     public final static String CONFIG = "plugins/config/"+ NAME + "/";
     public static ConfigurationFile props;
     public static ConfigurationFile passes;
+    public static ConfigurationFile ips;
     LoginPassListener listener = new LoginPassListener();
-//new ConnectionHook(
+
     //TODO This is a mess.
     public void enable() {
         LOG.info(SPRE + NAME + " by " + AUTHOR + " Ver:" + VER + " enabled!");
@@ -39,30 +40,12 @@ public class LoginPass extends Plugin {
         Canary.hooks().registerListener(listener, this, Priority.NORMAL, Type.PLAYER_CONNECT);
         Canary.hooks().registerListener(listener, this, Priority.NORMAL, Type.BLOCK_LEFTCLICKED);
         Canary.hooks().registerListener(listener, this, Priority.NORMAL, Type.BLOCK_RIGHTCLICKED);
-        
-        /*File file = new File(CONFIG);
-        try {
-            if (!file.exists()) {
-                file.mkdirs();
-            }
-        } catch (Exception e) {
-            Logman.logWarning(LoginPass.SPRE + "Could not create configuration dir!");
-        }
-        File file2 = new File(CONFIG + "passes.txt");
-        File file3 = new File(CONFIG + NAME + ".properties");
-        try {
-            if (!file2.exists()) {
-                file2.createNewFile();
-            }
-            if (!file3.exists()) {
-                file3.createNewFile();
-            }
-        } catch (Exception e) {
-            Logman.logWarning(LoginPass.SPRE + "Could not create configuration files!");
-        }*/
+        Canary.hooks().registerListener(listener, this, Priority.NORMAL, Type.LOGINCHECKS);
+
         try {
             props = new ConfigurationFile(CONFIG + NAME + ".properties", true);
             passes = new ConfigurationFile(CONFIG + "passes.txt", true);
+            ips = new ConfigurationFile(CONFIG + "ips.txt", true);
         } catch (Exception e) {
             Logman.logWarning(LoginPass.SPRE + "Could not create configuration file!");
             e.printStackTrace();
@@ -72,6 +55,15 @@ public class LoginPass extends Plugin {
 
     public void disable() {
         LOG.info(SPRE + NAME + " by " + AUTHOR + " Ver:" + VER + " disabled!");
+        try {
+            props.save();
+            passes.save();
+            ips.save();
+        } catch (Exception e) {
+            Logman.logWarning(LoginPass.SPRE + "Could not save file!");
+            e.printStackTrace();
+        }
+
     }
 
 }
