@@ -72,11 +72,11 @@ public class LoginPassActions {
             if (currIp.trim().equals("")) {
                 continue;
             }
-            if (currIp.equals("*")) {
+            if (currIp.equals("*") || currIp.equals(ip)) {
                 return true;
-            }
+            } 
             String currPart = "";
-            for (String part : ip.split(".")) {
+            for (String part : ip.split("\\.")) { //Split is stupid. Escape the . then escape the back slash.
                 currPart += part;
                 if (currIp.equals(currPart + ".*")) {
                     return true;

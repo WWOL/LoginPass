@@ -100,6 +100,7 @@ public class LoginPassListener extends PluginListener {
             hook.setCancelled();
         } else {
             if (unAuthedPlayers.contains(hook.getPlayer().getName()) && LoginPassSettings.BLOCK_COMMAND) {
+                LoginPassActions.sendMessage(hook.getPlayer(), "You can not use commands while not logged in!");
                 hook.setCancelled();
             }
             return hook;
