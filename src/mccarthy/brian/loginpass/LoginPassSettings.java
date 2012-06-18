@@ -70,7 +70,7 @@ public class LoginPassSettings {
             LoginPass.props.setString("digest_type", "SHA-1");
         }
         if (!LoginPass.props.containsKey("check_ip")) {
-            LoginPass.props.setBoolean("check_ip", true);
+            LoginPass.props.setBoolean("check_ip", false);
         }
         
         try {
