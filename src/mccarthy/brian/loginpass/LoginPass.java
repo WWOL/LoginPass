@@ -43,9 +43,9 @@ public class LoginPass extends Plugin {
         Canary.hooks().registerListener(listener, this, Priority.NORMAL, Type.LOGINCHECKS);
 
         try {
-            props = new ConfigurationFile(CONFIG + NAME + ".properties", true);
-            passes = new ConfigurationFile(CONFIG + "passes.txt", true);
-            ips = new ConfigurationFile(CONFIG + "ips.txt", true);
+            props = new ConfigurationFile(CONFIG + NAME + ".properties");
+            passes = new ConfigurationFile(CONFIG + "passes.txt");
+            ips = new ConfigurationFile(CONFIG + "ips.txt");
         } catch (Exception e) {
             Logman.logWarning(LoginPass.SPRE + "Could not create configuration file!");
             e.printStackTrace();
