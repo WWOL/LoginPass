@@ -17,11 +17,11 @@ public class LoginPassSettings {
     public static boolean BLOCK_COMMAND = true;
     public static boolean BLOCK_LEFTCLICK = true;
     public static boolean BLOCK_RIGHTCLICK = true;
-    
+
     public static String DIGEST_TYPE = "SHA-1";
-    
+
     public static boolean CHECK_IP = false;
-    
+
     public static void load() {
         writeDefaults();
         BLOCK_ATTACK = LoginPass.props.getBoolean("attack", true);
@@ -33,9 +33,9 @@ public class LoginPassSettings {
         BLOCK_COMMAND = LoginPass.props.getBoolean("command", true);
         BLOCK_LEFTCLICK = LoginPass.props.getBoolean("left_click", true);
         BLOCK_RIGHTCLICK = LoginPass.props.getBoolean("right_click", true);
-        
+
         DIGEST_TYPE = LoginPass.props.getString("digest_type", "SHA-1");
-        
+
         CHECK_IP = LoginPass.props.getBoolean("check_ip", false);
     }
     private static void writeDefaults() {
@@ -72,7 +72,7 @@ public class LoginPassSettings {
         if (!LoginPass.props.containsKey("check_ip")) {
             LoginPass.props.setBoolean("check_ip", false);
         }
-        
+
         try {
             LoginPass.props.save();
         } catch (Exception e) {

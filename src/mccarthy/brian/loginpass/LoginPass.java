@@ -1,7 +1,6 @@
 package mccarthy.brian.loginpass;
 
 import java.io.File;
-import java.util.logging.Logger;
 
 import net.canarymod.Canary;
 import net.canarymod.Logman;
@@ -17,10 +16,9 @@ import net.canarymod.plugin.Priority;
  *
  */
 public class LoginPass extends Plugin {
-    public final static Logger LOG = Logger.getLogger("Minecraft");
     public final static String NAME = "LoginPass";
     public final static String AUTHOR = "WWOL";
-    public final static String VER = "1.2";
+    public final static String VER = "1.2.1";
     public final static String SPRE = "[" + NAME + "] ";
     public final static String PRE = TextFormat.Blue + SPRE + TextFormat.Gold;
     public final static String CONFIG = "plugins" + File.separator + "config" + File.separator + NAME + File.separator;
@@ -30,7 +28,7 @@ public class LoginPass extends Plugin {
     LoginPassListener listener = new LoginPassListener();
 
     public void enable() {
-        LOG.info(SPRE + NAME + " by " + AUTHOR + " Ver:" + VER + " enabled!");
+        Logman.logInfo(SPRE + NAME + " by " + AUTHOR + " Ver:" + VER + " enabled!");
         Canary.hooks().registerListener(listener, this, Priority.NORMAL, Type.COMMAND);
         Canary.hooks().registerListener(listener, this, Priority.NORMAL, Type.PLAYER_MOVE);
         Canary.hooks().registerListener(listener, this, Priority.NORMAL, Type.CHAT);
@@ -53,7 +51,7 @@ public class LoginPass extends Plugin {
     }
 
     public void disable() {
-        LOG.info(SPRE + NAME + " by " + AUTHOR + " Ver:" + VER + " disabled!");
+        Logman.logInfo(SPRE + NAME + " by " + AUTHOR + " Ver:" + VER + " disabled!");
         try {
             props.save();
             passes.save();

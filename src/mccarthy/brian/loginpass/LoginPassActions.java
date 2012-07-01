@@ -66,7 +66,7 @@ public class LoginPassActions {
         }
         return sb.toString();
     }
-    
+
     public static boolean ipMatches(String name, String ip) {
         for (String currIp : LoginPass.ips.getString(name, "").split(",")) {
             if (currIp.trim().equals("")) {
