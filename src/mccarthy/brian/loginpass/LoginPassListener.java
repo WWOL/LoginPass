@@ -3,6 +3,7 @@ package mccarthy.brian.loginpass;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.canarymod.Canary;
 import net.canarymod.api.entity.Player;
 import net.canarymod.hook.Hook;
 import net.canarymod.hook.command.PlayerCommandHook;
@@ -112,6 +113,51 @@ public class LoginPassListener extends PluginListener {
                         hook.setCanceled();
                         return hook;
                     }
+                } else if (hook.getCommand()[1].equalsIgnoreCase("set")) {
+                    if (hook.getPlayer().hasPermission("loginpass.set")) {
+                        Player target;
+                        try {
+                            target = Canary.getServer().getPlayer(hook.getCommand()[2]);
+                        } catch (Exception e) {
+                            LoginPassActions.sendMessage(hook.getPlayer(), "Could not find player!");
+                            hook.setCanceled();
+                            return hook;
+                        }
+                        String hexHash = LoginPassActions.toHex(LoginPassActions.hash(target.getName(), hook.getCommand()[3]));
+                        LoginPass.passes.setString(target.getName(), hexHash);
+                        LoginPass.passes.save();
+                        LoginPassActions.sendMessage(hook.getPlayer(), "Pass for " + target.getName() + " changed!");
+                        LoginPassActions.sendMessage(target, "Pass changed to " + hook.getCommand()[3]);
+                    } else {
+                        LoginPassActions.sendMessage(hook.getPlayer(), "You do not have permission!");
+                        hook.setCanceled();
+                        return hook;
+                    }
+                } else if (hook.getCommand()[1].equalsIgnoreCase("setip")) {
+                    if (hook.getPlayer().hasPermission("loginpass.setip")) {
+                        Player target;
+                        try {
+                            target = Canary.getServer().getPlayer(hook.getCommand()[2]);
+                        } catch (Exception e) {
+                            LoginPassActions.sendMessage(hook.getPlayer(), "Could not find player!");
+                            hook.setCanceled();
+                            return hook;
+                        }
+                        String ip = hook.getCommand()[3];
+                        String currIPs = LoginPass.ips.getString(target.getName(), "");
+                        if (!currIPs.endsWith(",")) {
+                            currIPs = currIPs += ",";
+                        }
+                        currIPs += ip;
+                        LoginPass.ips.setString(target.getName(), currIPs);
+                        LoginPass.ips.save();
+                        LoginPassActions.sendMessage(hook.getPlayer(), "IP for " + target.getName() + " added!");
+                        LoginPassActions.sendMessage(target, "IP added: " + hook.getCommand()[3]);
+                    } else {
+                        LoginPassActions.sendMessage(hook.getPlayer(), "You do not have permission!");
+                        hook.setCanceled();
+                        return hook;
+                    }
                 }
             } catch (Exception e) {
                 LoginPassActions.sendHelp(hook.getPlayer());
@@ -156,6 +202,10 @@ public class LoginPassListener extends PluginListener {
     }
 
     public Hook onPlayerConnect(ConnectionHook hook) {
+        if (hook.getPlayer().hasPermission("loginpass.bypass")) {
+            LoginPassActions.sendMessage(hook.getPlayer(), "You bypassed login.");
+            return hook;
+        }
         unAuthedPlayers.add(hook.getPlayer().getName());
         if (LoginPass.passes.containsKey(hook.getPlayer().getName())) {
             LoginPassActions.sendMessage(hook.getPlayer(), "Please login using /loginpass login <pass>.");
@@ -169,7 +219,7 @@ public class LoginPassListener extends PluginListener {
         if (unAuthedPlayers.contains(hook.getPlayer().getName()) && LoginPassSettings.BLOCK_ITEM_DROP) {
             LoginPassActions.sendMessage(hook.getPlayer(), "You can not drop items while not logged in!");
             hook.setCanceled();
-            hook.getPlayer().getInventory().updateInventory();
+            hook.getPlayer().getInventory().update();
         }
         return hook;
     }
@@ -178,7 +228,7 @@ public class LoginPassListener extends PluginListener {
         if (unAuthedPlayers.contains(hook.getPlayer().getName()) && LoginPassSettings.BLOCK_ITEM_PICKUP) {
             LoginPassActions.sendMessage(hook.getPlayer(), "You can not pickup items while not logged in!");
             hook.setCanceled();
-            hook.getPlayer().getInventory().updateInventory();
+            hook.getPlayer().getInventory().update();
         }
         return hook;
     }
