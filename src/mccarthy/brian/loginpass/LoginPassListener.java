@@ -63,7 +63,7 @@ public class LoginPassListener extends PluginListener {
                     LoginPassActions.sendMessage(hook.getPlayer(), "Hash: " + sb.toString());
                     LoginPassActions.sendMessage(hook.getPlayer(), "Hash (hex): " + LoginPassActions.toHex(bytes));
 
-                }*/ else if (hook.getCommand()[1].equalsIgnoreCase("create")) {
+                }*/ else if (hook.getCommand()[1].equalsIgnoreCase("create") || hook.getCommand()[1].equalsIgnoreCase("register")) {
                     if (hook.getPlayer().hasPermission("loginpass.create")) {
                         if (LoginPass.passes.containsKey(hook.getPlayer().getName())) {
                             LoginPassActions.sendMessage(hook.getPlayer(), "You have already set a password.");
@@ -268,7 +268,7 @@ public class LoginPassListener extends PluginListener {
         if (LoginPassSettings.CHECK_IP) {
             boolean correctIP = LoginPassActions.ipMatches(hook.getName(), hook.getIp());
             if (!correctIP) {
-                hook.setKickReason("Your IP does not match an aloud one!");
+                hook.setKickReason("Your IP does not match an allowed one!");
             }
         }
         return hook;

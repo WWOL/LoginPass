@@ -18,7 +18,7 @@ import net.canarymod.plugin.Priority;
 public class LoginPass extends Plugin {
     public final static String NAME = "LoginPass";
     public final static String AUTHOR = "WWOL";
-    public final static String VER = "1.2.1";
+    public final static String VER = "1.2.2";
     public final static String SPRE = "[" + NAME + "] ";
     public final static String PRE = TextFormat.Blue + SPRE + TextFormat.Gold;
     public final static String CONFIG = "plugins" + File.separator + "config" + File.separator + NAME + File.separator;
