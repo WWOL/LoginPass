@@ -1,0 +1,4 @@
+main-class = mccarthy.brian.loginpass.LoginPass
+name = LoginPass
+author = WWOL (Brian McCarthy)
+version = 1.0
